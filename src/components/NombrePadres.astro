@@ -59,7 +59,6 @@
 
       // 🎯 ESTADO INICIAL - Todo oculto
       gsap.set("#seccion-mama", { opacity: 0, y: 30 });
-      gsap.set("#seccion-hermano", { opacity: 0, y: 30 });
       gsap.set("#seccion-madrinas", { opacity: 0, y: 30 });
       gsap.set("#adorno-izq", { opacity: 0, x: -30 });
       gsap.set("#adorno-der", { opacity: 0, x: 30 });
@@ -87,7 +86,7 @@
 
         // TODO aparece al mismo tiempo con la misma duración
         tl.to(
-          "#adorno-izq, #adorno-der, #seccion-mama, #seccion-hermano, #seccion-madrinas",
+          "#adorno-izq, #adorno-der, #seccion-mama, #seccion-madrinas",
           {
             opacity: 1,
             duration: 1,
@@ -114,7 +113,7 @@
             "<",
           )
           .to(
-            "#seccion-mama, #seccion-hermano, #seccion-madrinas",
+            "#seccion-mama, #seccion-madrinas",
             {
               y: 0,
               duration: 1,
@@ -130,7 +129,7 @@
 
         // TODO desaparece al mismo tiempo
         tl.to(
-          "#adorno-izq, #adorno-der, #seccion-mama, #seccion-hermano, #seccion-madrinas",
+          "#adorno-izq, #adorno-der, #seccion-mama, #seccion-madrinas",
           {
             opacity: 0,
             duration: 0.5,
@@ -157,7 +156,7 @@
             "<",
           )
           .to(
-            "#seccion-mama, #seccion-hermano, #seccion-madrinas",
+            "#seccion-mama, #seccion-madrinas",
             {
               y: 30,
               duration: 0.5,
