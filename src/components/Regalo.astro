@@ -1,0 +1,225 @@
+---
+// RegaloQR.astro
+---
+
+<section class="pt-2 md:py-12 lg:py-16 px-4 relative overflow-hidden">
+  <div class="max-w-4xl mx-auto relative z-10">
+    <div class="relative">
+      <!-- HOJA LATERAL IZQUIERDA -->
+      <div
+        class="absolute -left-8 md:-left-16 top-[80px] -translate-y-1/2 w-16 md:w-28 pointer-events-none z-0"
+        id="hoja-qr-izq"
+      >
+        <img
+          src="/imagenes/FlorLateral.webp"
+          alt="Hoja decorativa"
+          class="w-full h-auto object-contain"
+        />
+      </div>
+
+      <!-- HOJA LATERAL DERECHA -->
+      <div
+        class="absolute -right-8 md:-right-16 top-[80px] -translate-y-1/2 w-16 md:w-28 pointer-events-none z-0"
+        id="hoja-qr-der"
+      >
+        <img
+          src="/imagenes/FlorLateral.webp"
+          alt="Hoja decorativa"
+          class="w-full h-auto object-contain scale-x-[-1]"
+        />
+      </div>
+
+      <!-- SEPARADOR SUPERIOR -->
+      <div class="flex justify-center mb-6" id="separador-qr-top">
+        <img
+          src="/imagenes/FlorSeparador.webp"
+          alt="Separador decorativo"
+          class="w-32 md:w-40 lg:w-48 h-auto object-contain opacity-90"
+        />
+      </div>
+
+      <!-- TÍTULO -->
+      <div class="text-center mb-6" id="titulo-qr">
+        <h2
+          class="font-charm text-2xl md:text-3xl lg:text-4xl text-[#8E9198] font-bold mb-4"
+        >
+          Sugerencia de Regalo
+        </h2>
+        <div class="flex items-center justify-center gap-3">
+          <div
+            class="w-16 h-[2px] bg-gradient-to-r from-transparent to-[#85abbf]"
+          >
+          </div>
+          <div class="w-2 h-2 rounded-full bg-[#85abbf]"></div>
+          <div
+            class="w-16 h-[2px] bg-gradient-to-l from-transparent to-[#85abbf]"
+          >
+          </div>
+        </div>
+      </div>
+
+      <!-- MENSAJE PRINCIPAL -->
+      <div class="max-w-2xl mx-auto mb-8" id="mensaje-qr">
+        <p
+          class="font-charm text-xl md:text-2xl mx-6 text-[#85abbf] text-center leading-relaxed"
+        >
+          El mejor regalo es tu presencia, pero si deseas tener un detalle
+          conmigo, puedes hacerlo mediante el código QR o en efectivo.
+        </p>
+      </div>
+
+      <!-- CARD CON QR -->
+      <div
+        class="max-w-sm mx-auto bg-white rounded-3xl border-2 border-[#8E9198]/30 shadow-xl p-8 text-center"
+        id="card-qr"
+      >
+        <!-- Imagen QR grande -->
+        <div class="flex justify-center mb-6" id="qr-container">
+          <div
+            class="rounded-2xl overflow-hidden border-2 border-[#85abbf]/40 shadow-lg"
+          >
+            <img
+              src="/imagenes/qr.png"
+              alt="Código QR"
+              class="w-64 h-64 md:w-72 md:h-72 object-contain"
+            />
+          </div>
+        </div>
+
+        <!-- Línea decorativa -->
+        <div
+          class="flex items-center justify-center gap-3 mb-4"
+          id="decoracion-qr"
+        >
+          <div class="flex gap-1">
+            <div class="w-2 h-2 rounded-full bg-[#85abbf]/60"></div>
+            <div class="w-2 h-2 rounded-full bg-[#8E9198]/60"></div>
+            <div class="w-2 h-2 rounded-full bg-[#85abbf]/60"></div>
+          </div>
+        </div>
+
+        <!-- Datos debajo del QR -->
+        <div class="space-y-1">
+          <p class="font-charm text-lg md:text-xl text-[#8E9198] font-bold">
+            Nombre
+          </p>
+          <p class="font-charm text-xl md:text-2xl text-[#85abbf]">
+            Arminda Peralta Vargas
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (typeof window !== "undefined") {
+    document.addEventListener("DOMContentLoaded", () => {
+      gsap.set("#hoja-qr-izq", { opacity: 0, x: -50 });
+      gsap.set("#hoja-qr-der", { opacity: 0, x: 50 });
+      gsap.set("#separador-qr-top", { opacity: 0, scale: 0.8 });
+      gsap.set("#titulo-qr", { opacity: 0, scale: 0.8 });
+      gsap.set("#mensaje-qr", { opacity: 0, scale: 0.8 });
+      gsap.set("#card-qr", { opacity: 0, scale: 0.8 });
+
+      ScrollTrigger.create({
+        trigger: "#separador-qr-top",
+        start: "top 85%",
+        end: "top 20%",
+        onEnter: () => {
+          gsap.to("#separador-qr-top, #titulo-qr, #mensaje-qr, #card-qr", {
+            opacity: 1,
+            scale: 1,
+            duration: 1.2,
+            ease: "back.out(1.4)",
+          });
+
+          gsap.to("#hoja-qr-izq, #hoja-qr-der", {
+            opacity: 1,
+            x: 0,
+            duration: 1.2,
+            ease: "power3.out",
+          });
+
+          gsap.to("#qr-container > div", {
+            y: -5,
+            duration: 2.5,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1.2,
+          });
+
+          gsap.to("#hoja-qr-izq", {
+            y: -8,
+            rotation: -3,
+            duration: 3,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1.2,
+          });
+
+          gsap.to("#hoja-qr-der", {
+            y: -8,
+            rotation: 3,
+            duration: 3,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1.5,
+          });
+
+          gsap.to("#decoracion-qr div div", {
+            scale: 1.3,
+            opacity: 0.4,
+            duration: 2,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            stagger: 0.15,
+            delay: 1.5,
+          });
+        },
+        onLeaveBack: () => {
+          gsap.set("#hoja-qr-izq", { opacity: 0, x: -50 });
+          gsap.set("#hoja-qr-der", { opacity: 0, x: 50 });
+          gsap.set("#separador-qr-top", { opacity: 0, scale: 0.8 });
+          gsap.set("#titulo-qr", { opacity: 0, scale: 0.8 });
+          gsap.set("#mensaje-qr", { opacity: 0, scale: 0.8 });
+          gsap.set("#card-qr", { opacity: 0, scale: 0.8 });
+        },
+      });
+    });
+  }
+</script>
+
+<style>
+  #card-qr {
+    transition: all 0.3s ease;
+  }
+
+  #card-qr:hover {
+    box-shadow: 0 25px 60px rgba(133, 171, 191, 0.25);
+    transform: translateY(-5px);
+  }
+
+  #qr-container > div {
+    transition: all 0.4s ease;
+  }
+
+  #qr-container:hover > div {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(133, 171, 191, 0.3);
+  }
+
+  #hoja-qr-izq,
+  #hoja-qr-der {
+    will-change: transform;
+  }
+</style>
